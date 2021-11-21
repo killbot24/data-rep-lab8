@@ -18,16 +18,16 @@ export class edit extends React.Component {//Returns below text when called
 
     componentDidMount(){//Fires when compoent is active
         console.log(this.props.match.params.id);
-        axios.get('http://localhost:4000/api/movies/'+this.props.match.params.id)
+        axios.put('http://localhost:4000/api/movies/'+this.props.match.params.id)
         .then(response=>{
             this.setState({//saves input
-                _id:response.data.id,
+                _id:response.data._id,
                 Title:response.data.Title,
                 Year:response.data.Year,
                 Poster:response.data.Poster
             })
         })
-        .catch((error)=>{console.log(error)});//Shows error
+        .catch((error)=>{console.log(error+" Error in mount")});//Shows error
     }
     onChangeTitle(e) {
         this.setState({
@@ -55,7 +55,7 @@ export class edit extends React.Component {//Returns below text when called
         }
         axios.put('http://localhost:4000/api/movies/'+this.state._id,newMovie).then(res=>{//Sends id,body to server
             console.log(res.data._id)
-        }).catch((error)=>{console.log(error)});//Shows error
+        }).catch((error)=>{console.log(error+" Error in submit")});//Shows error
     }
     render() {
         return (
